@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<section class="py-5">
+    <div class="mt-5">
+        <input [(ngModel)]="searchKey" class="form-control border-black" type="search" placeholder="Search"
+            aria-label="Search">
+    </div>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div *ngFor="let recipe of recipes  | search : searchKey | paginate: { itemsPerPage: 8, currentPage: p } "
+                class="col mb-5">
+                <div class="card h-100">
+                    <img class="card-img-top" [src]="recipe.image || 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg'"
+                        alt="{{recipe.name}}" />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{recipe.name}}</h5>
+                            <p>prep time :{{recipe.cookTimeMinutes}}</p>
+                            <p>rating : {{recipe.rating}}</p>
+                            <p>mealType : {{recipe.mealType}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</section>
